@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-""" This module contains a function that returns the first element of a list """
+""" This module contains a function that
+returns the first element of a list """
 from typing import Sequence, Any, Union
 lst_t = Sequence[Any]
 r_t = Union[Any, None]
