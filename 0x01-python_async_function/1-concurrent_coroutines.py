@@ -1,16 +1,28 @@
-#!/bin/usr/env python3
-""" The basics of async """
-from typing import List
+#!/usr/bin/env python3
+"""
+    1-concurrent_coroutines.py
+"""
 import asyncio
-wait_random = __import__('0-basic_async_syntax').wait_random
+
+from typing import List
+
+
+wait_random = __import__("0-basic_async_syntax").wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
-    """ Waits for a random delay between 0 and max_delay """
-    li: List[asyncio.Future[float]] = []
-    for i in range(n):
-        li.append(wait_random(max_delay))
-    res: List[float] = []
-    for i in asyncio.as_completed(li):
-        res.append(await i)
-    return res
+    """
+    wait_n
+    @n: times to call wait_random
+    @max_delay: max delay of wait_random
+    Return: list of all delays
+    """
+
+    delays: List[asyncio.Future[float]] = []
+    for _ in range(n):
+        delays.append(wait_random(max_delay))
+
+    result: List[float] = []
+    for delay in asyncio.as_completed(delays):
+        result.append(await delay)
+    return result
